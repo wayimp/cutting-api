@@ -1,0 +1,18 @@
+version: '3.4'
+  
+networks:
+  web:
+    external:
+      name: web
+services:
+  cutting:
+    labels:
+      - 'traefik.backend=cutting'
+      - 'traefik.port=4040'
+      - 'traefik.frontend.rule=Host:cutting.boquetemarket.com'
+    networks:
+      web:
+    image: wayimp/cutting-api
+    ports:
+      - 4040:4040
+      - 27018:27017
