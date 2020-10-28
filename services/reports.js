@@ -46,17 +46,17 @@ async function routes (fastify, options) {
     request,
     reply
   ) {
-    /*
     if (request.headers && request.headers.authorization) {
       await request.jwtVerify()
     }
-*/
-    //let report = Object.assign(request.body)
+
+    let report = Object.assign(request.body)
 
     const created = await reportsCollection.insertOne(request.body)
     const id = created.ops[0]._id
 
     const customerEmail = created.ops[0].email
+
     if (validate(customerEmail)) {
       email(customerEmail, 'Report Details', link)
     }
@@ -105,7 +105,8 @@ async function routes (fastify, options) {
       const user = request.user
 
       const result = reportsCollection
-        .find({}).sort([['date', -1]])
+        .find({ archived: false })
+        .sort([['date', -1]])
         .toArray()
 
       return result

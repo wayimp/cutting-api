@@ -33,14 +33,14 @@ const issueSchema = {
 const logSchema = {
   type: 'object',
   properties: {
-    date: {
-      type: 'string'
+    logDate: {
+      type: 'date-time'
     },
-    on: {
-      type: 'string'
+    timeOn: {
+      type: 'date-time'
     },
-    off: {
-      type: 'string'
+    timeOff: {
+      type: 'date-time'
     },
     mileage: {
       type: 'number'
@@ -61,11 +61,14 @@ const reportSchema = {
   type: 'object',
   properties: {
     _id: { type: 'string' },
+    archived: {
+      type: 'boolean'
+    },
     job: {
       type: 'string'
     },
     date: {
-      type: 'string'
+      type: 'date-time'
     },
     po: {
       type: 'string'
@@ -155,13 +158,13 @@ const reportSchema = {
       type: 'string'
     },
     customerSignatureDate: {
-      type: 'string'
+      type: 'date-time'
     },
     servicemanSignature: {
       type: 'string'
     },
     servicemanSignatureDate: {
-      type: 'string'
+      type: 'date-time'
     }
   },
   required: ['job', 'customerName']
