@@ -7,12 +7,12 @@ networks:
 services:
   cutting:
     labels:
-      - 'traefik.backend=cutting'
+      - 'traefik.backend=cutting-api'
       - 'traefik.port=4040'
-      - 'traefik.frontend.rule=Host:cutting.boquetemarket.com'
+      - 'traefik.frontend.rule=Host:api.valleycuttingsystems.net'
     networks:
       web:
     image: wayimp/cutting-api
     ports:
       - 4040:4040
-      - 27018:27017
+      - 27019:27017
