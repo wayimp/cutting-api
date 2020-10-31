@@ -1,4 +1,5 @@
 const userSchema = require('../schema/user')
+const { ObjectId } = require('mongodb')
 
 const login = {
   schema: {
@@ -8,6 +9,18 @@ const login = {
         password: { type: 'string' }
       }
     }
+  }
+}
+
+const updateOne = {
+  body: {
+    userSchema
+  }
+}
+
+const deleteOne = {
+  response: {
+    200: {}
   }
 }
 
@@ -53,5 +66,45 @@ async function routes (fastify, options) {
 
     return { access_token: token }
   })
+
+  fastify.get('/users', multiple, async (request, reply) => {
+    try {
+      await request.jwtVerify()
+
+      const result = usersCollection
+        .find({})
+        .sort({ roles: 1 })
+        .toArray()
+
+      return result
+    } catch (err) {
+      reply.send(err)
+    }
+  })
+
+  fastify.post('/users', { schema: updateOne }, async function (
+    request,
+    reply
+  ) {
+    await request.jwtVerify()
+
+    const created = await usersCollection.insertOne(request.body)
+    created.id = created.ops[0]._id
+
+    return created
+  })
+
+  fastify.delete(
+    '/users/:id',
+    { schema: deleteOne },
+    async (request, reply) => {
+      const {
+        params: { id }
+      } = request
+      await request.jwtVerify()
+      const result = await usersCollection.deleteOne({ _id: ObjectId(id) })
+      return result
+    }
+  )
 }
 module.exports = routes

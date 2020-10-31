@@ -1,11 +1,9 @@
 const userSchema = {
   type: 'object',
   properties: {
-    _id: { type: 'string' },
-    username: { type: 'string' },
-    password: { type: 'string' },
-    roles: { type: 'string' },
-    active: { type: 'boolean' }
-  },
-  required: ['username', 'password']
+    _id: { type: String, required: false },
+    username: { type: String, required: true },
+    password: { type: String, required: true },
+    roles: { type: String, required: false }
+  }
 }

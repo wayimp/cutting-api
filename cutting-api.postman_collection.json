@@ -45,6 +45,98 @@
 			"response": []
 		},
 		{
+			"name": "User GetAll",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/users",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c3d47f37-a5bb-4b62-a829-d85598eed57a",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.globals.set(\"insertedId\", jsonData.insertedId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"test\",\n  \"password\": \"test\",\n  \"roles\": \"test\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/users",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/users/{{insertedId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"{{insertedId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Report GetAll",
 			"request": {
 				"method": "GET",
@@ -216,7 +308,7 @@
 	],
 	"variable": [
 		{
-			"id": "ba74f2a4-131e-4549-8b65-53e22fae8ad8",
+			"id": "a89003b3-0184-429e-9fb1-20be8da20651",
 			"key": "url",
 			"value": "http://localhost:4040"
 		}

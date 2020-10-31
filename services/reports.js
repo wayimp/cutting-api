@@ -46,20 +46,10 @@ async function routes (fastify, options) {
     request,
     reply
   ) {
-    if (request.headers && request.headers.authorization) {
-      await request.jwtVerify()
-    }
-
-    let report = Object.assign(request.body)
+    await request.jwtVerify()
 
     const created = await reportsCollection.insertOne(request.body)
-    const id = created.ops[0]._id
-
-    const customerEmail = created.ops[0].email
-
-    if (validate(customerEmail)) {
-      email(customerEmail, 'Report Details', link)
-    }
+    created.id = created.ops[0]._id
 
     return created
   })

@@ -1,7 +1,7 @@
 const itemSchema = {
   type: 'object',
   properties: {
-    _id: { type: 'string' },
+    _id: { type: String, required: false },
     'Active Status': { type: 'string' },
     Type: { type: 'string' },
     Item: { type: 'string' },

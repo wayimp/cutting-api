@@ -60,7 +60,7 @@ const logSchema = {
 const reportSchema = {
   type: 'object',
   properties: {
-    _id: { type: 'string' },
+    _id: { type: String, required: false },
     archived: {
       type: 'boolean'
     },
