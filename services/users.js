@@ -64,7 +64,7 @@ async function routes (fastify, options) {
       token = await reply.jwtSign(user)
     }
 
-    return { access_token: token }
+    return { access_token: token, roles: user.roles }
   })
 
   fastify.get('/users', multiple, async (request, reply) => {
