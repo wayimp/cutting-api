@@ -95,12 +95,11 @@ async function routes (fastify, options) {
       const { user, query } = request
 
       const findParams = {
-        archived: false,
-        customerSignature: { $exists: true, $eq: '' }
+        archived: false
       }
 
-      if (query.showClosed) {
-        delete findParams.customerSignature
+      if (!query.showClosed) {
+        findParams.customerSignature = { $exists: true, $eq: '' }
       }
 
       const result = reportsCollection
