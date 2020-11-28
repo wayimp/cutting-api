@@ -92,10 +92,19 @@ async function routes (fastify, options) {
     try {
       await request.jwtVerify()
 
-      const user = request.user
+      const { user, query } = request
+
+      const findParams = {
+        archived: false,
+        customerSignature: { $exists: true, $eq: '' }
+      }
+
+      if (query.showClosed) {
+        delete findParams.customerSignature
+      }
 
       const result = reportsCollection
-        .find({ archived: false })
+        .find(findParams)
         .sort([['date', -1]])
         .toArray()
 
