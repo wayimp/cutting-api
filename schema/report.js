@@ -79,6 +79,9 @@ const reportSchema = {
     customerStreet: {
       type: 'string'
     },
+    customerStreet2: {
+      type: 'string'
+    },
     customerCity: {
       type: 'string'
     },

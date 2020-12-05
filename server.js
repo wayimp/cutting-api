@@ -21,6 +21,8 @@ fastify.register(require('./mongodb'))
 fastify.register(require('./services/users'))
 fastify.register(require('./services/reports'))
 fastify.register(require('./services/items'))
+fastify.register(require('./services/companies'))
+
 //fastify.register(require('./plugins/authenticate'))
 
 //fastify.decorate('verifyJWT', verifyJWT)
