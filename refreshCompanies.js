@@ -5,7 +5,7 @@ const parseJobCodesPage = async jobCodes => {
   const names = await Object.entries(jobCodes.results.jobcodes).map(
     async ([key, value]) => {
       if (value.name) {
-        const company = { name: value.name }
+        const company = { name: value.name, job: value.id }
         if (value.locations && value.locations.length > 0) {
           const locationCode = value.locations[0]
           const locationInfo =
