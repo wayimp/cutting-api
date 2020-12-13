@@ -4,6 +4,9 @@ const companySchema = {
     name: {
       type: 'string'
     },
+    job: {
+      type: 'number'
+    },
     addr1: {
       type: 'string'
     },
