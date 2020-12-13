@@ -4,6 +4,7 @@ const moment = require('moment-timezone')
 const dateFormat = 'YYYY-MM-DDTHH:mm:SS'
 const { ObjectId } = require('mongodb')
 const { validate, email, slack } = require('../notify')
+const { getTSheets } = require('../getTSheets')
 
 const updateOne = {
   body: {
@@ -84,6 +85,10 @@ async function routes (fastify, options) {
       err.message = `id: ${id}.`
       throw err
     }
+
+    const tsheets = await getTSheets(result.job, result.date)
+
+    result.tsheets = tsheets
 
     return result
   })

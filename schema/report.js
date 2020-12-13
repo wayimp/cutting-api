@@ -1,3 +1,24 @@
+const plasmaSchema = {
+  type: 'object',
+  properties: {
+    plasmaType: {
+      type: 'string'
+    },
+    plasmaModel: {
+      type: 'string'
+    },
+    plasmaSerial: {
+      type: 'string'
+    },
+    gasConsoleSerial: {
+      type: 'string'
+    },
+    gasConsoleManufactureDate: {
+      type: 'date'
+    }
+  }
+}
+
 const materialSchema = {
   type: 'object',
   properties: {
@@ -30,29 +51,26 @@ const issueSchema = {
   required: ['description']
 }
 
-const logSchema = {
+const tsheetSchema = {
   type: 'object',
   properties: {
-    logDate: {
+    date: {
       type: 'date-time'
     },
-    timeOn: {
+    start: {
       type: 'date-time'
     },
-    timeOff: {
+    end: {
       type: 'date-time'
     },
-    mileage: {
+    duration: {
       type: 'number'
     },
-    hours: {
-      type: 'number'
+    name: {
+      type: 'string'
     },
-    lodging: {
-      type: 'boolean'
-    },
-    toll: {
-      type: 'boolean'
+    notes: {
+      type: 'string'
     }
   }
 }
@@ -100,19 +118,22 @@ const reportSchema = {
     machineSerial: {
       type: 'string'
     },
-    control: {
+    machinePowerSupply: {
       type: 'string'
     },
-    controlSerial: {
+    machineManufactureDate: {
+      type: 'date'
+    },
+    torchHeightControlModel: {
       type: 'string'
     },
-    plasmaType: {
+    torchHeightControlSerial: {
       type: 'string'
     },
-    plasmaModel: {
+    positionerSerial: {
       type: 'string'
     },
-    plasmaSerial: {
+    interfaceSerial: {
       type: 'string'
     },
     oxyFuel: {
@@ -121,11 +142,11 @@ const reportSchema = {
     torches: {
       type: 'number'
     },
-    drive: {
-      type: 'string'
-    },
-    driveSerial: {
-      type: 'string'
+    plasmas: {
+      type: 'array',
+      items: {
+        plasmaSchema
+      }
     },
     reportedTrouble: {
       type: 'string'
@@ -145,10 +166,10 @@ const reportSchema = {
         issueSchema
       }
     },
-    logs: {
+    tsheets: {
       type: 'array',
       items: {
-        logSchema
+        tsheetSchema
       }
     },
     completed: {
