@@ -5,6 +5,7 @@ const dateFormat = 'YYYY-MM-DDTHH:mm:SS'
 const { ObjectId } = require('mongodb')
 const { validate, email, slack } = require('../notify')
 const { getTSheets } = require('../getTSheets')
+const { pdfGen } = require('../pdf/pdfGen')
 
 const updateOne = {
   body: {
@@ -130,6 +131,29 @@ async function routes (fastify, options) {
       return result
     }
   )
+
+  fastify.get('/pdf/:id', multiple, async (request, reply) => {
+    const result = await reportsCollection.findOne({
+      _id: ObjectId(request.params.id)
+    })
+
+    if (!result) {
+      const err = new Error()
+      err.statusCode = 400
+      err.message = `id: ${id}.`
+      throw err
+    }
+
+    const tsheets = await getTSheets(result.job, result.date)
+    result.tsheets = tsheets
+
+    const pdf = pdfGen(result)
+
+    reply
+      .code(200)
+      .header('Content-Type', 'application/pdf')
+      .send(pdf)
+  })
 }
 
 module.exports = routes
