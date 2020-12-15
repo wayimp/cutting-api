@@ -130,6 +130,12 @@ const reportSchema = {
     torchHeightControlSerial: {
       type: 'string'
     },
+    driveModel: {
+      type: 'string'
+    },
+    driveSerial: {
+      type: 'string'
+    },
     positionerSerial: {
       type: 'string'
     },

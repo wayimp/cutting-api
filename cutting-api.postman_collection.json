@@ -282,6 +282,148 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "TSheets Current User",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "tokenType",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "accessToken",
+							"value": "S.5__8e128a072a0b7cebf73f4a5759297c039b50f6c4",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://rest.tsheets.com/api/v1/current_user",
+					"protocol": "https",
+					"host": [
+						"rest",
+						"tsheets",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"current_user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tsheets Jobcodes",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "tokenType",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "accessToken",
+							"value": "S.5__8e128a072a0b7cebf73f4a5759297c039b50f6c4",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://rest.tsheets.com/api/v1/jobcodes?page=1",
+					"protocol": "https",
+					"host": [
+						"rest",
+						"tsheets",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"jobcodes"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tsheets Timesheets",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "tokenType",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "accessToken",
+							"value": "S.5__8e128a072a0b7cebf73f4a5759297c039b50f6c4",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://rest.tsheets.com/api/v1/timesheets?jobcode_ids=11474733&start_date=2020-12-01",
+					"protocol": "https",
+					"host": [
+						"rest",
+						"tsheets",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"timesheets"
+					],
+					"query": [
+						{
+							"key": "jobcode_ids",
+							"value": "11474733"
+						},
+						{
+							"key": "start_date",
+							"value": "2020-12-01"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -308,7 +450,7 @@
 	],
 	"variable": [
 		{
-			"id": "a89003b3-0184-429e-9fb1-20be8da20651",
+			"id": "b0bb0809-b79a-4d6c-853c-1415dee2f76b",
 			"key": "url",
 			"value": "http://localhost:4040"
 		}
