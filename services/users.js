@@ -74,6 +74,9 @@ async function routes (fastify, options) {
       const result = usersCollection
         .find({})
         .sort({ roles: 1 })
+        .project({
+          password: 0
+        })
         .toArray()
 
       return result
