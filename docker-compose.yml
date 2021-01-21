@@ -5,7 +5,9 @@ networks:
     external:
       name: web
 services:
-  cutting:
+  cutting-ui:
+    env_file:
+      - .env
     labels:
       - 'traefik.backend=cutting-api'
       - 'traefik.port=4040'
