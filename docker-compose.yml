@@ -5,7 +5,7 @@ networks:
     external:
       name: web
 services:
-  cutting-ui:
+  cutting-api:
     env_file:
       - .env
     labels:
