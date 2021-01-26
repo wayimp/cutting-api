@@ -15,6 +15,9 @@ const plasmaSchema = {
     },
     gasConsoleManufactureDate: {
       type: 'date'
+    },
+    powerSupply: {
+      type: 'string'
     }
   }
 }
@@ -82,11 +85,14 @@ const reportSchema = {
     archived: {
       type: 'boolean'
     },
+    fieldService: {
+      type: 'boolean'
+    },
     job: {
       type: 'string'
     },
     date: {
-      type: 'date-time'
+      type: 'date'
     },
     po: {
       type: 'string'
@@ -116,9 +122,6 @@ const reportSchema = {
       type: 'string'
     },
     machineSerial: {
-      type: 'string'
-    },
-    machinePowerSupply: {
       type: 'string'
     },
     machineManufactureDate: {
@@ -157,7 +160,13 @@ const reportSchema = {
     reportedTrouble: {
       type: 'string'
     },
-    materials: {
+    materialsNeeded: {
+      type: 'array',
+      items: {
+        materialSchema
+      }
+    },
+    materialsUsed: {
       type: 'array',
       items: {
         materialSchema
