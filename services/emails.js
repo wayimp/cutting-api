@@ -41,6 +41,12 @@ async function routes (fastify, options) {
   const emailsCollection = fastify.mongo.db.collection('emails')
   const jwt = fastify.jwt
 
+  fastify.get('/sent/:reportId', multiple, async (request, reply) => {
+    const { reportId } = request.params
+    const result = emailsCollection.find({reportId}).toArray()
+    return result
+  })
+
   fastify.get('/emails/:id', multiple, async (request, reply) => {
     const result = await emailsCollection.findOne({
       _id: ObjectId(request.params.id)
@@ -60,10 +66,7 @@ async function routes (fastify, options) {
     try {
       await request.jwtVerify()
 
-      const result = emailsCollection
-        .find({})
-        .sort([['order', 1]])
-        .toArray()
+      const result = emailsCollection.find({}).toArray()
 
       return result
     } catch (err) {
@@ -75,9 +78,10 @@ async function routes (fastify, options) {
     request,
     reply
   ) {
-    const { to, subject, body, reportId } = request.body
+    const { action, to, subject, body, reportId } = request.body
 
     const created = await emailsCollection.insertOne({
+      action,
       to,
       subject,
       body,

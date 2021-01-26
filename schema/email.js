@@ -2,6 +2,7 @@ const emailSchema = {
   type: 'object',
   properties: {
     _id: { type: String, required: false },
+    action: { type: String, required: false },
     to: { type: String, required: true },
     subject: { type: String, required: true },
     body: { type: String, required: true },
