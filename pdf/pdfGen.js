@@ -173,10 +173,12 @@ const pdfGen = report => {
     )
 
     doc.text(
-      'Gas Console Serial #: ' +
+      'Console Serial #: ' +
         plasma.gasConsoleSerial +
-        '   Gas Console Manufacture Date: ' +
-        plasma.gasConsoleManufactureDate,
+        '   Console Manufacture Date: ' +
+        plasma.gasConsoleManufactureDate +
+        '   Power Supply: ' +
+        plasma.powerSupply,
       1.5,
       (linePosition += 0.2)
     )
@@ -197,18 +199,26 @@ const pdfGen = report => {
   const reportedTroubleLines = reportedTrouble.split(/\r\n|\r|\n/).length
   doc.text(reportedTrouble, 0.3, linePosition + 0.2)
 
-  report.materials.map(material => {
-    doc.text(
-      material.quantity +
-        'x'.padEnd(4, ' ') +
-        truncateString(material.description, 54),
-      4.0,
-      (linePosition += 0.2)
-    )
-  })
+  if (report.materialsUsed && Array.isArray(report.materialsUsed)) {
+    report.materialsUsed.map(material => {
+      doc.text(
+        material.quantity +
+          'x'.padEnd(4, ' ') +
+          truncateString(material.description, 54),
+        4.0,
+        (linePosition += 0.2)
+      )
+    })
+  }
 
-  if (reportedTroubleLines > report.materials.length) {
-    linePosition += (reportedTroubleLines - report.materials.length) * 0.2
+  if (
+    reportedTroubleLines >
+    (report.materialsUsed ? report.materialsUsed.length : 0)
+  ) {
+    linePosition +=
+      (reportedTroubleLines -
+        (report.materialsUsed ? report.materialsUsed.length : 0)) *
+      0.2
   } else {
     linePosition += 0.4
   }

@@ -3,7 +3,7 @@ const axios = require('axios')
 const moment = require('moment-timezone')
 const dateFormat = 'YYYY-MM-DDTHH:mm:SS'
 const { ObjectId } = require('mongodb')
-const { validate, email, slack } = require('../notify')
+const { validate, email } = require('../notify')
 const { getTSheets } = require('../getTSheets')
 const { pdfGen } = require('../pdf/pdfGen')
 
@@ -50,6 +50,7 @@ async function routes (fastify, options) {
   ) {
     await request.jwtVerify()
 
+    request.body.date = new Date(request.body.date)
     const created = await reportsCollection.insertOne(request.body)
     created.id = created.ops[0]._id
 
