@@ -7,16 +7,22 @@ module.exports = {
     return expression.test(String(email).toLowerCase())
   },
   email: function (to, subject, text) {
-    var transporter = nodemailer.createTransport({
-      service: 'gmail',
+    let transporter = nodemailer.createTransport({
+      host: 'smtp.office365.com', // Office 365 server
+      port: 587, // secure SMTP
+      secure: false, // false for TLS - as a boolean not string - but the default is false so just remove this completely
+      requireTLS: true,
       auth: {
-        user: 'boquetemarket@gmail.com',
-        pass: 'java6550'
+        user: process.env.OFFICE365_USER,
+        pass: process.env.OFFICE365_PASS
+      },
+      tls: {
+        ciphers: 'SSLv3'
       }
     })
 
-    var mailOptions = {
-      from: 'boquetemarket@gmail.com',
+    let mailOptions = {
+      from: process.env.OFFICE365_USER,
       to,
       subject,
       text
